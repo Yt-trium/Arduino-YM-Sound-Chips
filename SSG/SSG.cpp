@@ -137,22 +137,20 @@ void SSG::set_chan_frequency(word note, word octave, char chan)
 
 void SSG::set_chan_frequency_null(char chan = 1)
 {
-  word fT = 0;
-  
   if(chan & 1)
   {
-    write_data(0, (fT & 0xff));
-    write_data(1, (fT >> 8));
+    write_data(0, 0);
+    write_data(1, 0);
   }
   if(chan & 2)
   {
-    write_data(2, (fT & 0xff));
-    write_data(3, (fT >> 8));
+    write_data(2, 0);
+    write_data(3, 0);
   }
   if(chan & 4)
   {
-    write_data(4, (fT & 0xff));
-    write_data(5, (fT >> 8));
+    write_data(4, 0);
+    write_data(5, 0);
   }
 }
 
