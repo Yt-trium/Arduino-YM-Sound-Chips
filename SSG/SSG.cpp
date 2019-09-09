@@ -33,7 +33,11 @@ SSG::SSG()
   for(i=0; i<16; i++) {
     write_data(i, 0);
   }
-  write_data(7, 0b11111000);
+
+  // Default settings
+  mixer_status = 0b11111000;
+
+  write_data(7, mixer_status);
   
   write_data(8, 0x0f);
   write_data(9, 0x0f);
@@ -42,7 +46,7 @@ SSG::SSG()
 
 word SSG::note_to_YM(word note, word octave)
 {
-  return (fMaster / (16*pgm_read_float(&note_frequency[note][octave])));
+  return round(fMaster / (16*pgm_read_float(&note_frequency[note][octave])));
 }
 
 void SSG::set_mode_inactive()
@@ -118,36 +122,36 @@ void SSG::set_chan_frequency(word note, word octave, char chan)
 {
   word fT = note_to_YM(note, octave);
   
-  if(chan & 1)
+  if(chan & chanA)
   {
     write_data(0, (fT & 0xff));
     write_data(1, (fT >> 8));
   }
-  if(chan & 2)
+  if(chan & chanB)
   {
     write_data(2, (fT & 0xff));
     write_data(3, (fT >> 8));
   }
-  if(chan & 4)
+  if(chan & chanC)
   {
     write_data(4, (fT & 0xff));
     write_data(5, (fT >> 8));
   }
 }
 
-void SSG::set_chan_frequency_null(char chan = 1)
+void SSG::set_chan_frequency_null(char chan)
 {
-  if(chan & 1)
+  if(chan & chanA)
   {
     write_data(0, 0);
     write_data(1, 0);
   }
-  if(chan & 2)
+  if(chan & chanB)
   {
     write_data(2, 0);
     write_data(3, 0);
   }
-  if(chan & 4)
+  if(chan & chanC)
   {
     write_data(4, 0);
     write_data(5, 0);
@@ -156,15 +160,85 @@ void SSG::set_chan_frequency_null(char chan = 1)
 
 void SSG::set_chanA_frequency(int note, int octave)
 {
-  set_chan_frequency(note, octave, 1);
+  set_chan_frequency(note, octave, chanA);
 }
 
 void SSG::set_chanB_frequency(int note, int octave)
 {
-  set_chan_frequency(note, octave, 2);
+  set_chan_frequency(note, octave, chanB);
 }
 
 void SSG::set_chanC_frequency(int note, int octave)
 {
-  set_chan_frequency(note, octave, 4);
+  set_chan_frequency(note, octave, chanC);
+}
+
+void SSG::set_noise_frequency(char NP)
+{
+  // Noise frequency (fN) is obtained with this formula :
+  // fN = fMaster / (16*NP)
+  // NP is a 5 bit value
+  write_data(6, (NP & 0b00011111));
+}
+
+void SSG::set_chan_mixer(bool music, bool noise, char chan)
+{
+  if(chan & chanA)
+  {
+    if(music)
+      mixer_status &= 0;
+    else
+      mixer_status |= 1;
+
+    if(noise)
+      mixer_status &= ~(1 << 3);
+    else
+      mixer_status |= 1 << 3;
+  }
+  if(chan & chanB)
+  {
+    if(music)
+      mixer_status &= ~(1 << 1);
+    else
+      mixer_status |= 1 << 1;
+
+    if(noise)
+      mixer_status &= ~(1 << 4);
+    else
+      mixer_status |= 1 << 4;
+  }
+  if(chan & chanC)
+  {
+    if(music)
+      mixer_status &= ~(1 << 2);
+    else
+      mixer_status |= 1 << 2;
+
+    if(noise)
+      mixer_status &= ~(1 << 5);
+    else
+      mixer_status |= 1 << 5;
+  }
+  
+  write_data(7, mixer_status);
+}
+
+void SSG::set_chan_mixer_mute(char chan)
+{
+  set_chan_mixer(false, false, chan);
+}
+
+void SSG::set_chanA_mixer(bool music, bool noise)
+{
+  set_chan_mixer(music, noise, chanA);
+}
+
+void SSG::set_chanB_mixer(bool music, bool noise)
+{
+  set_chan_mixer(music, noise, chanB);
+}
+
+void SSG::set_chanC_mixer(bool music, bool noise)
+{
+  set_chan_mixer(music, noise, chanC);
 }

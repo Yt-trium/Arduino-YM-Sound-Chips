@@ -36,11 +36,25 @@ class SSG
     SSG();
 
     // Music
-    void set_chan_frequency(word note, word octave, char chan = 1);
-    void set_chan_frequency_null(char chan = 1);
+    void set_chan_frequency(word note, word octave, char chan = 7);
+    void set_chan_frequency_null(char chan = 7);
     void set_chanA_frequency(int note, int octave);
     void set_chanB_frequency(int note, int octave);
     void set_chanC_frequency(int note, int octave);
+
+    // Level control
+
+    // Noise
+    void set_noise_frequency(char NP);
+
+    // Mixer
+    void set_chan_mixer(bool music, bool noise, char chan = 7);
+    void set_chan_mixer_mute(char chan = 7);
+    void set_chanA_mixer(bool music, bool noise);
+    void set_chanB_mixer(bool music, bool noise);
+    void set_chanC_mixer(bool music, bool noise);
+    
+    // Envelope
     
   private:
     // convert note and octave into a word
@@ -65,6 +79,9 @@ class SSG
     void set_address(char address);
     void set_data(char data);
     void write_data(char address, char data);
+
+    // Mixer current status
+    char mixer_status;
 };
 
 #endif
