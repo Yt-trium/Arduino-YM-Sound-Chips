@@ -6,7 +6,7 @@ Using Yamaha Sound Chips as Audio Device for Arduino
 
 | Sound Chip   | Work in progress | Works |
 | ------------ | :--------------: | :---: |
-| YM2149 (SSG) | :white_check_mark: | :x: |
+| YM2149 (SSG) | :white_circle: | :white_check_mark: |
 | YM2203 (OPN) | :white_check_mark: | :x: |
 | YM2151 (OPM) | :x: | :x: |
 
@@ -15,7 +15,7 @@ Using Yamaha Sound Chips as Audio Device for Arduino
 
 | Sound Chip   | Write to chip | Music (A/B/C) | Noise | Mixer | Level control | Envelope |
 | ------------ | :-----------: | :-----------: | :---: | :---: | :-----------: | :------: |
-| YM2149 (SSG) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :x: |
+| YM2149 (SSG) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 | Sound Chip   | OPN as SSG |
 | ------------ | :--------: |
