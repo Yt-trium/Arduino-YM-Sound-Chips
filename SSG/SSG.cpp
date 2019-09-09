@@ -41,7 +41,7 @@ SSG::SSG()
 
   write_data(8, 0x0f);
   write_data(9, 0x0f);
-  write_data(10, 0x0f);
+  write_data(0xA, 0x0f);
 }
 
 word SSG::note_to_YM(word note, word octave)
@@ -190,7 +190,7 @@ void SSG::set_chan_level(char level, char chan = 7)
   }
   if(chan & chanC)
   {
-    write_data(10, level);
+    write_data(0xA, level);
   }
 }
 
@@ -213,7 +213,6 @@ void SSG::set_chanC_level(char level)
 {
   set_chan_level(level, chanC);
 }
-
 
 void SSG::set_noise_frequency(char NP)
 {
@@ -283,4 +282,65 @@ void SSG::set_chanB_mixer(bool music, bool noise)
 void SSG::set_chanC_mixer(bool music, bool noise)
 {
   set_chan_mixer(music, noise, chanC);
+}
+
+void SSG::set_envelope_frequency(word EP)
+{
+  // Envelope repetition frequency (fE) is obtained with this formula :
+  // fE = fMaster / (256*EP)
+  // EP is a 16 bit value
+  // The period of the actual frequency fE used for the envelope
+  // generated is 1/32 of the envelope repetition period (1/fE)
+  // Check the YM2149 datasheet page 7 for more informations.
+  
+  write_data(0xB, (EP & 0xff));
+  write_data(0xC, (EP >> 8));
+}
+
+void SSG::set_envelope_shape(bool cont, bool att, bool alt, bool hold)
+{
+  // Check the YM2149 datasheet page 7 and 8 to view the 10 envelope possible shapes.
+  word RD = 0;
+
+  if(cont)
+    RD |= 1 << 3;
+  if(att)
+    RD |= 1 << 2;
+  if(alt)
+    RD |= 1 << 1;
+  if(hold)
+    RD |= 1;
+
+  write_data(0xD, RD);
+}
+
+void SSG::set_chan_use_envelope(char chan)
+{
+  if(chan & chanA)
+  {
+    write_data(8, 0x1f);
+  }
+  if(chan & chanB)
+  {
+    write_data(9, 0x1f);
+  }
+  if(chan & chanC)
+  {
+    write_data(0xA, 0x1f);
+  }
+}
+
+void SSG::set_chanA_use_envelope()
+{
+  set_chan_use_envelope(chanA);
+}
+
+void SSG::set_chanB_use_envelope()
+{
+  set_chan_use_envelope(chanB);
+}
+
+void SSG::set_chanC_use_envelope()
+{
+  set_chan_use_envelope(chanC);
 }

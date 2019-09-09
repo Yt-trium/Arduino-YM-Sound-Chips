@@ -61,6 +61,13 @@ class SSG
     void set_chanC_mixer(bool music, bool noise);
     
     // Envelope
+    // To use the the envelope, you need to enable it on channels
+    void set_envelope_frequency(word EP);
+    void set_envelope_shape(bool cont, bool att, bool alt, bool hold);
+    void set_chan_use_envelope(char chan = 7);
+    void set_chanA_use_envelope();
+    void set_chanB_use_envelope();
+    void set_chanC_use_envelope();
     
   private:
     // convert note and octave into a word
