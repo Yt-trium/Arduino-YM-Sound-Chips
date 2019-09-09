@@ -38,7 +38,7 @@ SSG::SSG()
   mixer_status = 0b11111000;
 
   write_data(7, mixer_status);
-  
+
   write_data(8, 0x0f);
   write_data(9, 0x0f);
   write_data(10, 0x0f);
@@ -172,6 +172,48 @@ void SSG::set_chanC_frequency(int note, int octave)
 {
   set_chan_frequency(note, octave, chanC);
 }
+
+void SSG::set_chan_level(char level, char chan = 7)
+{
+  if(level > 0b1111)
+    level = 0x0f;
+  else
+    level &= ~(1 << 4);
+     
+  if(chan & chanA)
+  {
+    write_data(8, level);
+  }
+  if(chan & chanB)
+  {
+    write_data(9, level);
+  }
+  if(chan & chanC)
+  {
+    write_data(10, level);
+  }
+}
+
+void SSG::set_chan_level_null(char chan = 7)
+{
+  set_chan_level(0, chan);
+}
+
+void SSG::set_chanA_level(char level)
+{
+  set_chan_level(level, chanA);
+}
+
+void SSG::set_chanB_level(char level)
+{
+  set_chan_level(level, chanB);
+}
+
+void SSG::set_chanC_level(char level)
+{
+  set_chan_level(level, chanC);
+}
+
 
 void SSG::set_noise_frequency(char NP)
 {

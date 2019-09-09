@@ -43,6 +43,12 @@ class SSG
     void set_chanC_frequency(int note, int octave);
 
     // Level control
+    // Using the level control, you disable the use of the envelope
+    void set_chan_level(char level, char chan = 7);
+    void set_chan_level_null(char chan = 7);
+    void set_chanA_level(char level);
+    void set_chanB_level(char level);
+    void set_chanC_level(char level);
 
     // Noise
     void set_noise_frequency(char NP);
