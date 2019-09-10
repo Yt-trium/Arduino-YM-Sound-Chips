@@ -41,9 +41,10 @@ Using Yamaha Sound Chips as Audio Device for Arduino
 | YM2203     | OPN         | YM3014              | :white_check_mark:     |
 | YM2608     | OPNA        | YM3016              | Awaiting delivery      |
 | YM2610     | OPNB        | YM3016              | Awaiting delivery      |
-| YM2612     | OPN2        |                     |                        |
-| YM3438     | OPN2C       |                     |                        |
-| YMF288     | OPN3        |                     |                        |
+| YM2612     | OPN2        |                     | :x:                    |
+| YM3438     | OPN2C       |                     | Awaiting delivery      |
+| YMF276     | OPN2L       | DAC :grey_question: | :x:                    |
+| YMF288     | OPN3        | DAC :grey_question: | :x:                    |
 |            |             |                     |                        |
 | YM2151     | OPM         |                     |                        |
 | YM2164     | OPP         |                     |                        |
@@ -64,4 +65,5 @@ Using Yamaha Sound Chips as Audio Device for Arduino
 | YM3014     | Y3014B      | DAC        | :white_check_mark: |
 | YAC512     |             | DAC        | :x:                |
 | YM3016     | YM3016-D    | DAC        | Awaiting delivery  |
+| YM3012     |             | DAC        | :white_check_mark: |
 
