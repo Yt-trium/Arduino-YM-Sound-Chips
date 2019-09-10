@@ -45,8 +45,15 @@ Using Yamaha Sound Chips as Audio Device for Arduino
 | YM3438     | OPN2C       |                     |                        |
 | YMF288     | OPN3        |                     |                        |
 |            |             |                     |                        |
+| YM2151     | OPM         |                     |                        |
+| YM2164     | OPP         |                     |                        |
+| YM2154     | RYP4        |                     |                        |
+| YM2414     | OPZ         |                     |                        |
+| YMF292     | SCSP        |                     |                        |
+| YMF7xx     | DS-1        |                     |                        |
+| YMZ280B    | PCMD8       |                     |                        |
 |            |             |                     |                        |
-|            |             |                     |                        |
+| DSP-1      |             |                     |                        |
 
 
 
@@ -57,8 +64,4 @@ Using Yamaha Sound Chips as Audio Device for Arduino
 | YM3014     | Y3014B      | DAC        | :white_check_mark: |
 | YAC512     |             | DAC        | :x:                |
 | YM3016     | YM3016-D    | DAC        | Awaiting delivery  |
-	
 
-YM2151 (OPM)YM2164 (OPP)YM2154 (RYP4)YM2414 (OPZ)YMF292 (SCSP)YMF7xx (DS-1)YMZ280B (PCMD8)
-DSP	
-DSP-1
