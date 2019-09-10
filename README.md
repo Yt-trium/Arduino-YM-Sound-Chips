@@ -31,7 +31,7 @@ Using Yamaha Sound Chips as Audio Device for Arduino
 | YM2149F    | SSG         | :white_circle:      | :white_check_mark:     |
 |            |             |                     |                        |
 | YM3526     | OPL         | YM3014              | Awaiting delivery      |
-| YM2413     | OPLL        | quartz oscillator   | Awaiting delivery      |
+| YM2413     | OPLL        |                     | Awaiting delivery      |
 | Y8950      | MSX-AUDIO   | YM3014              | :x:                    |
 | YM3812     | OPL2        | YM3014              | Awaiting delivery      |
 | YMF262     | OPL3        | YAC512              | :x:                    |
