@@ -62,3 +62,43 @@ Using Yamaha Sound Chips as Audio Device for Arduino
 | YM3016     | YM3016-D    | DAC        | Awaiting delivery  |
 | YM3012     |             | DAC        | :white_check_mark: |
 
+
+## Play Songs
+
+To play and store a song, we have to convert a music score into C arrays which can be interpreted by the program.
+A Python script to transform a channel from a midi file into an array will be available soon.
+
+### SSG
+
+At first, a song is loaded, then we need to call an update function (song_next_iteration()) to update the SSG register.  
+For now, we want an SSG song to command the following elements.
+
+* 3 square wave channel (note and duration)
+* 1 noise (frequency and duration)
+
+For each channel, we use two arrays, one for note and one for duration.  
+The note array is read when the previous note has finished and we update the channel frequency with it's information. If value is 0, the channel is muted  
+The duration array is read when the previous note has finished and we update the couter (which is decremented every time the update function is called) with the value in the duration array.
+For memory reason, we use char (8 bits) to store thoses information, but if a duration is longer than 255 call, we can use a word (16 bits) using 3 cases of the array, one for a 0 flag and two for 16 bits duration.
+
+```
+{0, 0x01, 0x90} // 400 call duration.
+```
+
+The tempo is set by the delay between each call to the update function. For this reason, the duration has no absolute relation with "note value", if the update is called 4 times per BPM, a "4" duration is a 𝅘𝅥 but if the update is called 8 times per BPM, it's a 𝅘𝅥𝅮.
+
+In our future example, we use the following table as default
+
+| Duration    | Equivalent in note value |
+| :---------: | :----------------------: |
+| 1           | 𝅘𝅥𝅲 |
+| 2           | 𝅘𝅥𝅱 |
+| 4           | 𝅘𝅥𝅰 |
+| 8           | 𝅘𝅥𝅯 |
+| 16          | 𝅘𝅥𝅮 |
+| 32          | 𝅘𝅥 |
+| 48          | 𝅘𝅥. |
+| 64          | 𝅗𝅥 |
+| 96          | 𝅗𝅥. |
+| 128         | 𝅝 |
+| 256 (0,1,0) | 𝅝𝆊𝅝 |
