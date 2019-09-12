@@ -2,6 +2,19 @@
 Using Yamaha Sound Chips as Audio Device for Arduino
 
 
+### The idea and the objectives
+The purpose of this project is to provide an Arduino compatible library, very simple to use and with the minimum need of additional components to work with oldschool Yamaha Sound Chips.  
+The library does not aim to use the sound chips to their full potential, but rather to allow their use in third-party projects without difficulty.  
+<br/>
+
+If you are interested about more advanced use of the YM2149 (SSG) chip, like streaming, reading SNDH files, I recommend the work of [![FlorentFlament](https://avatars2.githubusercontent.com/u/6681007?s=20&v=4) FlorentFlament](https://github.com/FlorentFlament) :
+* [FlorentFlament/ym2149-test](https://github.com/FlorentFlament/ym2149-test)
+* [FlorentFlament/ym2149-streamer](https://github.com/FlorentFlament/ym2149-streamer)
+* [FlorentFlament/ym2149-sndh](https://github.com/FlorentFlament/ym2149-sndh)
+
+These works really help me at the beginning of the project.
+
+
 ## State of progress
 
 | Sound Chip   | Work in progress | Works |
