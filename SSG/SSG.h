@@ -26,9 +26,9 @@
 #define fMaster 2000000
 
 // channels for SSG::set_chan_frequency
-#define chanA 1
-#define chanB 2
-#define chanC 4
+#define chanA 0b001
+#define chanB 0b010
+#define chanC 0b100
 
 class SSG
 {
