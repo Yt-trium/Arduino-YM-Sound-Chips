@@ -227,9 +227,9 @@ void SSG::set_chan_mixer(bool music, bool noise, char chan)
   if(chan & chanA)
   {
     if(music)
-      mixer_status &= 0;
+      mixer_status &= ~(1 << 0);
     else
-      mixer_status |= 1;
+      mixer_status |= 1 << 0;
 
     if(noise)
       mixer_status &= ~(1 << 3);
